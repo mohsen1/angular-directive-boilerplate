@@ -113,6 +113,13 @@ gulp.task('open', function(){
   .pipe(open('', {url: 'http://localhost:8080/demo/demo.html'}));
 });
 
+gulp.task('test', function (done) {
+  karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done);
+});
+
 function handleError(err) {
   console.log(err.toString());
   this.emit('end');

@@ -16,6 +16,7 @@ var gutil = require('gulp-util');
 var plumber = require('gulp-plumber');
 var open = require('gulp-open');
 var less = require('gulp-less');
+var order = require("gulp-order");
 
 
 var config = {
@@ -44,7 +45,7 @@ gulp.task('html', function () {
 gulp.task('watch', function () {
   gulp.watch(['./demo/**/*.html'], ['html']);
   gulp.watch(['./**/*.less'], ['styles']);
-  gulp.watch(['./**/*.js'], ['scripts']);
+  gulp.watch(['./**/*.js', 'src/**/*.html'], ['scripts']);
 });
 
 gulp.task('clean', function(cb) {
@@ -77,6 +78,10 @@ gulp.task('scripts', function() {
     .pipe(plumber({
       errorHandler: handleError
     }))
+    .pipe(order([
+      'directive.js',
+      'template.js'
+    ]))
     .pipe(concat('directive.js'))
     .pipe(header(config.banner, {
       timestamp: (new Date()).toISOString(), pkg: config.pkg

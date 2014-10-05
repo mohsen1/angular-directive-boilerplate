@@ -1,12 +1,13 @@
-angular.module('the.directive', []).directive('the.directive', TheDirective);
+angular.module('the.directive', []).directive('theDirective', TheDirective);
 
 function TheDirective() {
+  var value = 0;
+
   return {
     restrict: 'AE',
-    template: 'src/directive.html',
+    templateUrl: 'directive.html',
     replcae: true,
     link: function ($scope) {
-      var value = 0;
 
       $scope.getValue = function () {
         return value;

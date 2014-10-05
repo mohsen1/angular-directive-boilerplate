@@ -1,14 +1,14 @@
 /*!
  * angular-directive-template
  * 
- * Version: 0.0.0 - 2014-10-05T09:41:09.242Z
+ * Version: 0.0.0 - 2014-10-05T09:45:52.421Z
  * License: MIT
  */
 
 
-angular.module('the.directive', []).directive('theDirective', TheDirective);
+'use strict';
 
-function TheDirective() {
+angular.module('the.directive', []).directive('theDirective', function () {
   var value = 0;
 
   return {
@@ -25,6 +25,5 @@ function TheDirective() {
       };
     }
   };
-}
-
-angular.module("the.directive").run(["$templateCache", function($templateCache) {$templateCache.put("directive.html","<div class=\"the-directive\"><div>value is {{getValue()}}</div><button ng-click=\"increment()\">+</button></div>");}]);
+});
+angular.module("the.directive").run(["$templateCache", function($templateCache) {$templateCache.put("directive.html","<div class=\"the-directive\"><div>The value is {{getValue()}}</div><button ng-click=\"increment()\">+</button></div>");}]);

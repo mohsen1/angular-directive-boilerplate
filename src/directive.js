@@ -1,6 +1,6 @@
-angular.module('the.directive', []).directive('theDirective', TheDirective);
+'use strict';
 
-function TheDirective() {
+angular.module('the.directive', []).directive('theDirective', function () {
   var value = 0;
 
   return {
@@ -17,4 +17,4 @@ function TheDirective() {
       };
     }
   };
-}
+});

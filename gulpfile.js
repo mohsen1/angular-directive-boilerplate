@@ -15,6 +15,7 @@ var templateCache = require('gulp-angular-templatecache');
 var gutil = require('gulp-util');
 var plumber = require('gulp-plumber');
 var open = require('gulp-open');
+var less = require('gulp-less');
 
 
 var config = {
@@ -41,14 +42,16 @@ gulp.task('html', function () {
 });
 
 gulp.task('watch', function () {
-  gulp.watch(['./demo/*.*'], ['html']);
+  gulp.watch(['./demo/**/*.html'], ['html']);
+  gulp.watch(['./**/*.less'], ['styles']);
+  gulp.watch(['./**/*.js'], ['scripts']);
 });
 
 gulp.task('clean', function(cb) {
   del(['dist'], cb);
 });
 
-gulp.task('scripts', ['clean'], function() {
+gulp.task('scripts', function() {
 
   function buildTemplates() {
     return gulp.src('src/**/*.html')
@@ -81,7 +84,23 @@ gulp.task('scripts', ['clean'], function() {
     .pipe(gulp.dest('dist'))
     .pipe(rename('directive.min.js'))
     .pipe(uglify({preserveComments: 'some'}))
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./dist'))
+    .pipe(connect.reload());
+});
+
+
+gulp.task('styles', function() {
+
+  return gulp.src('src/directive.less')
+    .pipe(less())
+    .pipe(header(config.banner, {
+      timestamp: (new Date()).toISOString(), pkg: config.pkg
+    }))
+    .pipe(gulp.dest('dist'))
+    .pipe(minifyCSS())
+    .pipe(rename({ext:'.min.css'}))
+    .pipe(gulp.dest('dist'))
+    .pipe(connect.reload());
 });
 
 gulp.task('open', function(){
@@ -94,5 +113,5 @@ function handleError(err) {
   this.emit('end');
 };
 
-gulp.task('serve', ['connect', 'watch', 'open']);
-gulp.task('default', ['scripts']);
+gulp.task('serve', ['clean', 'scripts', 'styles', 'connect', 'watch', 'open']);
+gulp.task('default', ['clean', 'scripts', 'styles']);

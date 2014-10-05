@@ -1,12 +1,12 @@
 'use strict';
 
 describe('the-directive', function () {
-  var scope, $compile, $rootScope, $compile, element;
+  var scope, $compile, $rootScope, element;
 
-  function createDirective() {
+  function createDirective(template) {
     var elm;
 
-    elm = angular.element('<the-directive></the-directive>');
+    elm = angular.element(template);
     angular.element(document.body).prepend(elm);
     $compile(elm)(scope);
     scope.$digest();
@@ -25,12 +25,18 @@ describe('the-directive', function () {
     if (element) element.remove();
   });
 
-  describe('when created', function () {
+  describe('as an element', function(){ runTestsWithTemplate('<the-directive></the-directive>'); });
+  describe('as an attribute', function(){ runTestsWithTemplate('<div the-directive></div>'); });
 
-    it('initial of the value should be 0', function () {
-      element = createDirective();
+  function runTestsWithTemplate(template) {
+    describe('when created', function () {
 
-      expect(element.text()).toContain('0');
+      it('should initial the value to 0', function () {
+        element = createDirective(template);
+
+        expect(element.text()).toContain('0');
+      });
     });
-  });
+  }
+
 });

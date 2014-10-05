@@ -113,10 +113,20 @@ gulp.task('open', function(){
   .pipe(open('', {url: 'http://localhost:8080/demo/demo.html'}));
 });
 
-gulp.task('test', function (done) {
+gulp.task('jshint-test', function(){
+  return gulp.src('./test/**/*.js').pipe(jshint());
+})
+
+gulp.task('karma', function (done) {
   karma.start({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
+  }, done);
+});
+
+gulp.task('karma-serve', function(done){
+  karma.start({
+    configFile: __dirname + '/karma.conf.js'
   }, done);
 });
 
@@ -125,5 +135,8 @@ function handleError(err) {
   this.emit('end');
 };
 
-gulp.task('serve', ['clean', 'scripts', 'styles', 'connect', 'watch', 'open']);
-gulp.task('default', ['clean', 'scripts', 'styles']);
+gulp.task('build', ['clean', 'scripts', 'styles']);
+gulp.task('serve', ['build', 'connect', 'watch', 'open']);
+gulp.task('default', ['build', 'test']);
+gulp.task('test', ['build', 'jshint-test', 'karma']);
+gulp.task('serve-test', ['build', 'watch', 'jshint-test', 'karma-serve']);

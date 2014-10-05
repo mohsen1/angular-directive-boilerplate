@@ -1,6 +1,6 @@
 {
   "name": "angular-directive-boilerplate",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Angular Publishable Directive Boilerplate",
   "main": "dist/directive.js",
   "scripts": {

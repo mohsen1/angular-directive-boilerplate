@@ -7,7 +7,7 @@
   "description": "Angular Publishable Directive Template",
   "main": "dist/directive.js, dist/directive.js",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "ignore": [
     "**/.*",
     "node_modules",

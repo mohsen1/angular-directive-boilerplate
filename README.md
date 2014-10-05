@@ -21,7 +21,7 @@ From here, you can start changing things and make your own directive.
 Install via bower
 
 ```shell
-bower install angular-directive-template
+bower install the-template
 ```
 
 ### Usage

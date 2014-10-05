@@ -1,7 +1,7 @@
 /*!
  * angular-directive-template
  * 
- * Version: 0.0.0 - 2014-10-05T09:45:52.421Z
+ * Version: 0.0.0 - 2014-10-05T09:54:16.121Z
  * License: MIT
  */
 

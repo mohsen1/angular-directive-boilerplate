@@ -103,7 +103,7 @@ gulp.task('styles', function() {
     }))
     .pipe(gulp.dest('dist'))
     .pipe(minifyCSS())
-    .pipe(rename({ext:'.min.css'}))
+    .pipe(rename('directive.min.css'))
     .pipe(gulp.dest('dist'))
     .pipe(connect.reload());
 });

@@ -1,7 +1,7 @@
 /*!
  * angular-directive-boilerplate
  * 
- * Version: 0.0.0 - 2014-10-05T19:33:47.048Z
+ * Version: 0.0.5 - 2014-10-06T04:21:35.698Z
  * License: MIT
  */
 

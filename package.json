@@ -1,6 +1,6 @@
 {
   "name": "angular-directive-boilerplate",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Angular Publishable Directive Boilerplate",
   "repository": "git@github.com:mohsen1/angular-directive-boilerplate.git",
   "main": "dist/directive.js",

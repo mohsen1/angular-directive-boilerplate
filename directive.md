@@ -1,6 +1,3 @@
-# Bower Publishable Angular Directive Boilerplate
-
-This is a simple AngularJS directive boilerplate to help you start your own AngularJS directive and publish it in Bower and NPM.
 # The Directive
 
 ### Installation

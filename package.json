@@ -1,7 +1,8 @@
 {
   "name": "angular-directive-boilerplate",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Angular Publishable Directive Boilerplate",
+  "repository": "git@github.com:mohsen1/angular-directive-boilerplate.git",
   "main": "dist/directive.js",
   "scripts": {
     "test": "./node_modules/gulp/bin/gulp.js test"

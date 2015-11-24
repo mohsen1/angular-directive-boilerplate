@@ -32,7 +32,7 @@ var config = {
 
 gulp.task('connect', function() {
   connect.server({
-    root: '.',
+    root: [__dirname],
     livereload: true
   });
 });
@@ -52,7 +52,7 @@ gulp.task('clean', function(cb) {
   del(['dist'], cb);
 });
 
-gulp.task('scripts', function() {
+gulp.task('scripts', ['clean'], function() {
 
   function buildTemplates() {
     return gulp.src('src/**/*.html')
@@ -74,6 +74,17 @@ gulp.task('scripts', function() {
       .pipe(jshint.reporter('fail'));
   };
 
+  gulp.src('src/directive.less')
+      .pipe(less())
+      .pipe(header(config.banner, {
+        timestamp: (new Date()).toISOString(), pkg: config.pkg
+      }))
+      .pipe(gulp.dest('dist'))
+      .pipe(minifyCSS())
+      .pipe(rename({suffix: '.min'}))
+      .pipe(gulp.dest('dist'))
+      .pipe(connect.reload());
+
   es.merge(buildDistJS(), buildTemplates())
     .pipe(plumber({
       errorHandler: handleError
@@ -90,21 +101,6 @@ gulp.task('scripts', function() {
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify({preserveComments: 'some'}))
     .pipe(gulp.dest('./dist'))
-    .pipe(connect.reload());
-});
-
-
-gulp.task('styles', function() {
-
-  return gulp.src('src/directive.less')
-    .pipe(less())
-    .pipe(header(config.banner, {
-      timestamp: (new Date()).toISOString(), pkg: config.pkg
-    }))
-    .pipe(gulp.dest('dist'))
-    .pipe(minifyCSS())
-    .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('dist'))
     .pipe(connect.reload());
 });
 
@@ -135,7 +131,7 @@ function handleError(err) {
   this.emit('end');
 };
 
-gulp.task('build', ['clean', 'scripts', 'styles']);
+gulp.task('build', ['scripts']);
 gulp.task('serve', ['build', 'connect', 'watch', 'open']);
 gulp.task('default', ['build', 'test']);
 gulp.task('test', ['build', 'jshint-test', 'karma']);

@@ -14,7 +14,7 @@ angular.module('the.directive', []).directive('theDirective', function () {
   return {
     restrict: 'AE',
     templateUrl: 'directive.html',
-    replcae: true,
+    replace: true,
     link: function ($scope) {
 
       $scope.getValue = function () {

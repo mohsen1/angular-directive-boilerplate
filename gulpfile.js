@@ -49,7 +49,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('clean', function(cb) {
-  del(['/dist'], cb);
+  del(['dist/**/*'], cb);
 });
 
 gulp.task('scripts', ['clean'], function() {
